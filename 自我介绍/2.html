@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function clickCounter() {
+    if(typeof(Storage) !== "undefined") {
+        if (localStorage.clickcount) {
+            localStorage.clickcount = Number(localStorage.clickcount)+1;
+        } else {
+            localStorage.clickcount = 1;
+        }
+        document.getElementById("result").innerHTML = "已经记录了这个按钮 " + localStorage.clickcount + " 次被点击。";
+    } else {
+        document.getElementById("result").innerHTML = "你的浏览器不支持这个程序运行";
+    }
+}
+</script>
+</head>
+<body>
+<p><button onclick="clickCounter()" type="button">别点</button></p>
+<div id="result"></div>
+<p>计数器</p>
+</body>
+</html>

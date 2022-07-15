@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+ <head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+   body {
+    background-color: #DDDDDD;
+   }
+
+   .box {
+    width: 1000px;
+    height: 100px;
+    margin: 0 auto;
+    margin-top: 100px;
+    clear: both;
+   }
+
+   #btn {
+    width: 50px;
+    height: 50px;
+    margin-left: 100px;
+    margin-top: 20px;
+   }
+
+   .name {
+    width: 100px;
+    height: 100px;
+    float: left;
+    background-color: #F0F8FF;
+    margin-left: 10px;
+    margin-top: 10px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+   }
+
+   #span {
+    float: right;
+    position: relative;
+    top: 10px;
+    right: 500px;
+    color: #FF0000;
+    font-size: 25px;
+   }
+
+   h1{
+    text-align: center;
+   }
+   h2{font-size: 15px;
+	   font-family:行书;
+    text-align: center;
+   }
+  </style>
+ </head>
+ <body>
+  <h1>抽奖系统</h1>
+  <h2>时间:<h2>
+ <span id="span"></span>
+  <button><a href="index.html">返回</a></button>
+  <div class="box" id="box"></div>
+  <input type="button" id="btn" value="抽奖" />
+  <span id="_span"></span>
+  <script>
+   function my$(id) {
+    return document.getElementById(id)
+   };
+   var arr = ["1", "2", "3", "4", "5", "6", "7", "8",
+    "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26",
+    "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44",
+    "45"
+   ];
+   for (var i = 0; i < arr.length; i++) {
+    var div = document.createElement("div");
+    div.innerText = arr[i];
+    div.className = "name";
+    my$("box").appendChild(div);
+   };
+   var _index;
+   my$("btn").onclick = function() {
+    var peoples = arr.length;
+    if (this.value === "抽奖") {
+     timeId = setInterval(function() {
+      for (var i = 0; i < arr.length; i++) {
+       my$("box").children[i].style.background = ""
+      };
+      var random = parseInt(Math.random() * peoples);
+      my$("box").children[random].style.background = "orangered";
+
+      my$('_span').innerText = arr[random];
+                       _index = random;
+                   },100);
+                   this.value="停止";
+               }else{
+                   my$('_span').innerText = arr[_index];
+                   clearInterval(timeId);
+                   this.value="抽奖";
+               };
+           };
+           getTime();
+           setInterval(getTime,1000)
+           function getTime(){
+               var day = new Date();
+               var year = day.getFullYear();
+               var month = day.getMonth()+1;
+               var dat = day.getDate();
+               var hour = day.getHours();
+               var minitue = day.getMinutes();
+               var second = day.getSeconds();
+               month=month<10?"0"+month:month;
+               dat=dat<10?"0"+dat:dat;
+               hour=hour<10?"0"+hour:hour;
+               minitue=minitue<10?"0"+minitue:minitue;
+               second=second<10?"0"+second:second;
+               my$("span").innerText=year+"-"+month+"-"+dat+" "+hour+":"+minitue+":"+second
+           }  
+       </script>
+
+</html>
